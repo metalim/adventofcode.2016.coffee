@@ -1,5 +1,16 @@
+_render = (s)->
+	process.stdout.cursorTo 0
+	process.stdout.write s
+	process.stdout.clearLine 1
+	return
 
 exports.log = exports._log = _log = require 'ololog'
+.methods Object.defineProperties {},
+	clear:
+		enumerable: yes
+		configurable: yes
+		get: -> @configure render: _render
+
 
 #
 # fast array permutation

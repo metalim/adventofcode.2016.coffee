@@ -1,4 +1,4 @@
-_log = require 'ololog'
+{_log} = require './util'
 _print = _log.noLocate
 
 input = '''
@@ -11,8 +11,8 @@ count_all_safe = ( seed, num )->
 	for c in seed when c is '.'
 		++safe
 	next = seed.split ''
-
 	while --num > 0
+		_print.clear "#{num}: #{safe}" unless num%100
 		cur = next
 		next = for i in [0...cur.length]
 			l = cur[i-1] is '^'
@@ -20,7 +20,8 @@ count_all_safe = ( seed, num )->
 			v = l^r
 			safe += v^1
 			'.^'[v]
-		#_log next.join ''
+	_print.clear()
+
 	safe
 
 
