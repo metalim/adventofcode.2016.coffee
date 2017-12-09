@@ -1,4 +1,9 @@
-_log = require 'ololog'
+{_log} = require './util'
+_print = _log.noLocate
+assert = ( cond, msg... )->
+	if not cond
+		_print.red msg...
+	cond
 
 input = '''
 '''
