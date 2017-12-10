@@ -4,18 +4,18 @@ _render = (s)->
 	process.stdout.clearLine 1
 	return
 
-exports.log = exports._log = _log = require 'ololog'
+exports.trace = exports._trace = _trace = require 'ololog'
 .methods Object.defineProperties {},
 	clear:
 		enumerable: yes
 		configurable: yes
 		get: -> @configure render: _render
 
-exports._print = exports.print = _print = _log.noLocate
+exports._log = exports.log = _log = _trace.noLocate
 
 exports.assert = assert = ( cond, msg... )->
 	unless cond
-		_print.red msg...
+		_trace.red msg...
 		throw new Error 'assertion failed'
 	cond
 
@@ -66,3 +66,7 @@ minmax_of = permute.minmax_of = ( min, max, arr, cb )->
 			return out
 	return
 
+
+
+# print is deprecated
+exports._print = exports.print = _log 

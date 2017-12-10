@@ -52,7 +52,7 @@ exec = ( prog, st )->
 				--st[l[1]]
 			when 'jnz'
 				if ( st[l[1]] ? +l[1] ) isnt 0
-					i += +l[2]
+					i += st[l[2]] ? +l[2]
 					continue
 			else
 				throw new Error 'invalid instruction', l
