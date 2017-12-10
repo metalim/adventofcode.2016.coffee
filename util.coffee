@@ -11,6 +11,13 @@ exports.log = exports._log = _log = require 'ololog'
 		configurable: yes
 		get: -> @configure render: _render
 
+exports._print = exports.print = _print = _log.noLocate
+
+exports.assert = assert = ( cond, msg... )->
+	unless cond
+		_print.red msg...
+		throw new Error 'assertion failed'
+	cond
 
 #
 # fast array permutation
