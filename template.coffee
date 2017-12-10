@@ -1,9 +1,5 @@
-{_log} = require './util'
-_print = _log.noLocate
-assert = ( cond, msg... )->
-	if not cond
-		_print.red msg...
-	cond
+{_log,_print,assert} = require './util'
+ansi = require('ansicolor').nice
 
 input = '''
 '''
