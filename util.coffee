@@ -1,19 +1,11 @@
-_render_t = Date.now()
-_render = (s,{idle})->
-	if idle?
-		now = Date.now()
-		if now - _render_t < idle
-			return
-		_render_t = now
+_render = (s)->
 	process.stdout.cursorTo 0
 	process.stdout.write s
 	process.stdout.clearLine 1
 	return
 
 exports.trace = exports._trace = _trace = require 'ololog'
-.methods Object.defineProperties {
-		idle: (t)-> @configure render: idle:t
-	},
+.methods Object.defineProperties {},
 	clear:
 		enumerable: yes
 		configurable: yes

@@ -79,7 +79,8 @@ class Solver
 				++step
 				cur = next
 				next = []
-				_log.clear.idle(200).darkGray 'dot', idot, 'step', step, 'length', cur.length
+				if idle 200
+					_log.clear.darkGray 'dot', idot, 'step', step, 'length', cur.length
 
 				for [cx,cy] in cur
 					for d in DIR
@@ -104,7 +105,8 @@ class Solver
 		permute @dots[1..], ( p )=>
 			if return_to_0
 				p.push @dots[0]
-			_log.clear.idle(200).darkGray (d[2] for d in p).join ','
+			if idle 200
+				_log.clear.darkGray (d[2] for d in p).join ','
 			len = 0
 			for d2, i in p
 				d1=p[i-1] ? @dots[0]
@@ -113,6 +115,13 @@ class Solver
 			return
 		_log.clear ''
 		min
+
+idle_t = Date.now()
+idle = ( dt )->
+	t = Date.now()
+	if res = t-idle_t >= dt
+		idle_t = t
+	res
 
 do ->
 	try
