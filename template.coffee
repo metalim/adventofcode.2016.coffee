@@ -1,17 +1,17 @@
 {_log,_print,assert} = require './util'
 ansi = require('ansicolor').nice
 
-input = '''
-'''
-
-parse = ( input )->
-
-exec = ( )->
+class Solver
+	constructor: ( @input )->
+	solve: ->
 
 do ->
+	input = '''
+	'''
+
 	try
-		_log.darkGray v = parse input
-		_log.yellow exec v
+		s = new Solver input
+		_log.yellow s.solve()
 
 	catch e
 		_log.red e

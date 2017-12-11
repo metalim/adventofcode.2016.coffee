@@ -1,11 +1,19 @@
-_render = (s)->
+_render_t = Date.now()
+_render = (s,{idle})->
+	if idle?
+		now = Date.now()
+		if now - _render_t < idle
+			return
+		_render_t = now
 	process.stdout.cursorTo 0
 	process.stdout.write s
 	process.stdout.clearLine 1
 	return
 
 exports.trace = exports._trace = _trace = require 'ololog'
-.methods Object.defineProperties {},
+.methods Object.defineProperties {
+		idle: (t)-> @configure render: idle:t
+	},
 	clear:
 		enumerable: yes
 		configurable: yes
@@ -39,7 +47,8 @@ permute = exports.permute = ( arr, cb )->
 			++c[i]
 			i = 1
 			if cb?
-				return if no is cb permutation
+				if result = cb permutation[..]
+					return result
 			else
 				result.push permutation[..]
 		else
